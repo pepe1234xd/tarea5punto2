@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
     try {
         if (!isEmpty(transaction)) {
             const id = await transactions.insert(transaction);
-            res.send(201).send(id);
+            res.send(id);
         } else {
             res.status(204).send(null);
         }    
@@ -45,7 +45,8 @@ router.post('/', async (req, res) => {
 
 router.get('/sum', async (req, res) => {
     try {
-        const sum = await transactions.sum();
+        const id = req.params.id;
+        const sum = await transactions.sum(id);
         res.send(sum);
     } catch (error) {
         console.error(error);
